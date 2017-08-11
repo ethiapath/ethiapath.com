@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>canvas</title>
+		<script src="modernizr.js"></script>
+		<script type="text/javascript">
+			window.addEventListener("load", eventWindowLoaded, false);
+			var Debugger = function () { };
+			Debugger.log = function (message) {
+				try {
+					console.log(message);
+				} catch (exception) {
+					return;
+				}
+			}
+			function eventWindowLoaded () {
+				 canvasApp();
+			 }
+			 function canvasSupport () {
+				 return modernizr.canvas;
+			 }
+			 function canvasApp () {
+				 if (!canvasSupport()) {
+					 return;
+				 }
+			var theCanvas = document.getElementById("canvasTest");
+			var context = theCanvas.getContext("2d");
+			Debugger.log("Drawing Canvas");
+			function drawScreen() {
+				//clears the screen 
+				context.fillStyle = "ffffaa";
+				context.fillRect(0, 0, 500, 300);
+				//draws Hello World
+				context.fillStyle = "#000000";
+				context.font = "20px Sans-Serif";
+				context.textBaseline = "top";
+				context.fillText ("Hello World!", 195, 80);
+				//Image
+				var helloWorldImage = new Image();
+				helloWorldImage.onload = function () {
+					context.drawImage(helloWorldImage, 160, 130);
+				}
+				helloWorldImage.src = "helloWorld.gif";
+				//box
+				context.srokeStyle = "#000000";
+				context.strokeRect(5, 5, 490, 290);
+			}
+			drawScreen();
+			}
+		</script>
+	</head> 
+	<body>
+		<div style="position: absolute; top: 50px; left: 50px;">
+			<canvas id="canvasTest" width="500" heigth="300">
+			Your browser does not support HTML5 Canvas.
+			</canvas>
+		</div>
+	</body>
+</html>
